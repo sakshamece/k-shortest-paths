@@ -9,19 +9,16 @@ public class WeightedEdge implements Comparable<WeightedEdge> {
     private String sourceLabel;
     private String targetLabel;
     private double edgeWeight = 0.0;
-    private double availableBW; // New field
 
-    public WeightedEdge(String targetLabel, double edgeWeight, double availableBW) {
+    public WeightedEdge(String targetLabel, double edgeWeight) {
         this.targetLabel = targetLabel;
         this.edgeWeight = edgeWeight;
-        this.availableBW = availableBW; // Initialize new field
     }
 
-    public WeightedEdge(String sourceLabel, String targetLabel, double edgeWeight, double availableBW) {
+    public WeightedEdge(String sourceLabel, String targetLabel, double edgeWeight) {
         this.sourceLabel = sourceLabel;
         this.targetLabel = targetLabel;
         this.edgeWeight = edgeWeight;
-        this.availableBW = availableBW; // Initialize new field
     }
 
     public String getSourceLabel() {
@@ -46,14 +43,6 @@ public class WeightedEdge implements Comparable<WeightedEdge> {
 
     public void setEdgeWeight(double edgeWeight) {
         this.edgeWeight = edgeWeight;
-    }
-
-    public double getAvailableBW() {
-        return availableBW;
-    }
-
-    public void setAvailableBW(double availableBW) {
-        this.availableBW = availableBW;
     }
 
     public int compareTo(WeightedEdge comparedObject) {
