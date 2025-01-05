@@ -9,17 +9,20 @@ public class Edge implements Cloneable {
     private String fromNode;
     private String toNode;
     private double weight;
+    private double availableBW; // New field
 
     public Edge() {
         this.fromNode = null;
         this.toNode = null;
         this.weight = Double.MAX_VALUE;
+        this.availableBW = 0.0; // Initialize new field
     }
 
-    public Edge(String fromNode, String toNode, double weight) {
+    public Edge(String fromNode, String toNode, double weight, double availableBW) {
         this.fromNode = fromNode;
         this.toNode = toNode;
         this.weight = weight;
+        this.availableBW = availableBW; // Initialize new field
     }
 
     public String getFromNode() {
@@ -46,8 +49,16 @@ public class Edge implements Cloneable {
         this.weight = weight;
     }
 
+    public double getAvailableBW() {
+        return availableBW;
+    }
+
+    public void setAvailableBW(double availableBW) {
+        this.availableBW = availableBW;
+    }
+
     public Edge clone() {
-        return new Edge(fromNode, toNode, weight);
+        return new Edge(fromNode, toNode, weight, availableBW);
     }
 
     public String toString() {
@@ -58,13 +69,15 @@ public class Edge implements Cloneable {
         sb.append(toNode);
         sb.append("){");
         sb.append(weight);
+        sb.append(",");
+        sb.append(availableBW); // Append new field
         sb.append("}");
 
         return sb.toString();
     }
 
     public boolean equals(Edge edge2) {
-        if (hasSameEndpoints(edge2) && weight == edge2.getWeight())
+        if (hasSameEndpoints(edge2) && weight == edge2.getWeight() && availableBW == edge2.getAvailableBW())
             return true;
 
         return false;
