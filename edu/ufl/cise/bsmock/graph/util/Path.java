@@ -68,7 +68,7 @@ public class Path implements Cloneable, Comparable<Path> {
 
     public void addFirstNode(String nodeLabel) {
         String firstNode = edges.getFirst().getFromNode();
-        edges.addFirst(new Edge(nodeLabel, firstNode,0));
+        edges.addFirst(new Edge(nodeLabel, firstNode, 0, 0.0));
     }
 
     public void addFirst(Edge edge) {
@@ -83,7 +83,7 @@ public class Path implements Cloneable, Comparable<Path> {
 
     public void addLastNode(String nodeLabel) {
         String lastNode = edges.getLast().getToNode();
-        edges.addLast(new Edge(lastNode, nodeLabel,0));
+        edges.addLast(new Edge(lastNode, nodeLabel, 0, 0.0));
     }
 
     public int size() {
@@ -106,29 +106,6 @@ public class Path implements Cloneable, Comparable<Path> {
         sb.append("]");
         return sb.toString();
     }
-
-/*    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Path path = (Path) o;
-
-        if (Double.compare(path.totalCost, totalCost) != 0) return false;
-        if (!edges.equals(path.edges)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = edges.hashCode();
-        temp = Double.doubleToLongBits(totalCost);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
-    }*/
 
     public boolean equals(Path path2) {
         if (path2 == null)
@@ -190,7 +167,6 @@ public class Path implements Cloneable, Comparable<Path> {
         if (i > l)
             i = l;
 
-        //for (Edge edge : this.edges.subList(0,i)) {
         for (int j = 0; j < i; j++) {
             edges.add(this.edges.get(j).clone());
         }
