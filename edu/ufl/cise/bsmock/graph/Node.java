@@ -14,15 +14,18 @@ import java.util.Set;
 
 public class Node {
     protected String label;
-    protected HashMap<String,Double> neighbors; // adjacency list, with HashMap for each edge weight
+    protected HashMap<String, Double> neighbors; // adjacency list, with HashMap for each edge weight
+    protected HashMap<String, Double> availableBWs; // adjacency list, with HashMap for each edge available bandwidth
 
     public Node() {
         neighbors = new HashMap();
+        availableBWs = new HashMap();
     }
 
     public Node(String label) {
         this.label = label;
         neighbors = new HashMap();
+        availableBWs = new HashMap();
     }
 
     public String getLabel() {
@@ -41,14 +44,24 @@ public class Node {
         this.neighbors = neighbors;
     }
 
-    public void addEdge(String toNodeLabel,Double weight) {
+    public HashMap<String, Double> getAvailableBWs() {
+        return availableBWs;
+    }
+
+    public void setAvailableBWs(HashMap<String, Double> availableBWs) {
+        this.availableBWs = availableBWs;
+    }
+
+    public void addEdge(String toNodeLabel, Double weight, Double availableBW) {
         neighbors.put(toNodeLabel, weight);
+        availableBWs.put(toNodeLabel, availableBW);
     }
 
     public double removeEdge(String toNodeLabel) {
         if (neighbors.containsKey(toNodeLabel)) {
             double weight = neighbors.get(toNodeLabel);
             neighbors.remove(toNodeLabel);
+            availableBWs.remove(toNodeLabel);
             return weight;
         }
 
@@ -62,12 +75,12 @@ public class Node {
     public LinkedList<Edge> getEdges() {
         LinkedList<Edge> edges = new LinkedList<Edge>();
         for (String toNodeLabel : neighbors.keySet()) {
-            edges.add(new Edge(label,toNodeLabel,neighbors.get(toNodeLabel)));
+            edges.add(new Edge(label, toNodeLabel, neighbors.get(toNodeLabel), availableBWs.get(toNodeLabel)));
         }
 
         return edges;
     }
-    
+
     public String toString() {
         StringBuilder nodeStringB = new StringBuilder();
         nodeStringB.append(label);
